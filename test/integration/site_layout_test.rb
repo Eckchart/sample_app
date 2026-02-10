@@ -11,10 +11,14 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", help_path
     assert_select "a[href=?]", about_path
     assert_select "a[href=?]", contact_path
+    assert_select "a[href=?]", signup_path
 
     # Is it good to do this test here if we already do it in
     # the tests for static pages controller??
     get contact_path
     assert_select "title", full_title("Contact") 
+
+    get signup_path
+    assert_select "title", full_title("Sign up")
   end
 end
