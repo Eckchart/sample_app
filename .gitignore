@@ -36,5 +36,3 @@
 
 # Ignore db test files.
 db/test.*
-
-/first_user_PASSWORD
