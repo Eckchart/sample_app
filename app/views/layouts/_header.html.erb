@@ -10,6 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
+
             <ul id="navbar-menu" class="nav navbar-nav navbar-right collapse navbar-collapse">
                 <li><%= link_to "Home", root_path %></li>
                 <li><%= link_to "Help", help_path %></li>
@@ -21,14 +22,14 @@
                             Account <b class="caret"></b>
                         </a>
                         <ul id="dropdown-menu" class="dropdown-menu">
-                            <!-- `link_to current_user` is equivalent to
-                                `link_to user_path(current_user)` -->
+                            <%# `link_to current_user` is equivalent to
+                                `link_to user_path(current_user)` %>
                             <li><%= link_to "Profile", current_user %></li>
-                            <li><%= link_to "Settings", '#' %></li>
+                            <li><%= link_to "Settings", edit_user_path(current_user) %></li>
                             <li class="divider"></li>
                             <li>
-                                <!-- make a "delete" request to /logout (kind of!!!),
-                                    to delete the current session -->
+                                <%# make a "delete" request to /logout (kind of!!!),
+                                <%# to delete the current session %>
                                 <%= link_to "Log out", logout_path, 
                                         data: { "turbo-method": :delete } %>
                             </li>
