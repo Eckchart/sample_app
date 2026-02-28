@@ -57,7 +57,7 @@ class ValidLoginTest < ValidLogin
     follow_redirect!
     assert_template 'users/show'
     assert_select "a[href=?]", login_path, count: 0
-    assert_select "a[href=?]", logout_path
+    assert_select "a[href=?][data-turbo-method=?]", logout_path, "delete"
     assert_select "a[href=?]", user_path(@user)  # "Profile" link
   end
 end
@@ -81,7 +81,7 @@ class LogoutTest < Logout
   test "redirect after logout" do
     follow_redirect!
     assert_select "a[href=?]", login_path
-    assert_select "a[href=?]", logout_path, count: 0
+    assert_select "a[href=?][data-turbo-method=?]", logout_path, "delete", count: 0
     assert_select "a[href=?]", user_path(@user), count: 0  # "Profile" link
   end
 end
