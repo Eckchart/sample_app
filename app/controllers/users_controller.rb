@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # display user page
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   # sign up page
