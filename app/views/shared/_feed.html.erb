@@ -1,0 +1,17 @@
+<% if @feed_items.any? %>
+    <ol class="microposts">
+        <%# Here, Rails knows to call the micropost partial (`_micropost)
+        <%# because each element of `@feed_items` has class `Micropost`. %>
+        <%= render @feed_items %>
+    </ol>
+    <%# Not strictly necessary to add the `params` parameter IF we have
+    <%# `get "/microposts", to: "static_pages#home"` in our routes, but
+    <%# obviously I'm leaving it for completion; plus, if we decide to have
+    <%# a micropost form somewhere else, and we run into the same issue,
+    <%# we probably don't want to redirect to `static_pages#home`, but to
+    <%# another action instead! %>
+    <%= will_paginate @feed_items, params: {
+        controller: :static_pages,
+        action: :home
+    } %>
+<% end %>
