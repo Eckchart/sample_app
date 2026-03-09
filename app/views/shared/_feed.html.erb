@@ -1,6 +1,6 @@
 <% if @feed_items.any? %>
     <ol class="microposts">
-        <%# Here, Rails knows to call the micropost partial (`_micropost)
+        <%# Here, Rails knows to call the micropost partial (`_micropost`)
         <%# because each element of `@feed_items` has class `Micropost`. %>
         <%= render @feed_items %>
     </ol>
