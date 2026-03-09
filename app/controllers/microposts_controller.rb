@@ -5,6 +5,7 @@ class MicropostsController < ApplicationController
   # create new micropost (post request)
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    @micropost.image_file.attach(params[:micropost][:image_file])
     if @micropost.save
       flash[:success] = "Micropost created!"
       redirect_to root_url
@@ -14,6 +15,7 @@ class MicropostsController < ApplicationController
     end
   end
 
+  # delete micropost (delete request)
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted!"
@@ -27,7 +29,7 @@ class MicropostsController < ApplicationController
 
   private
     def micropost_params
-      params.require(:micropost).permit(:content)
+      params.require(:micropost).permit(:content, :image_file)
     end
 
     def correct_user

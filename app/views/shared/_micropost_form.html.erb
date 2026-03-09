@@ -9,4 +9,7 @@
         <%= form.text_area :content, placeholder: "Compose new micropost..." %>
     </div>
     <%= form.submit "Post", class: "btn btn-primary" %>
+    <span class="image">
+        <%= form.file_field :image_file %>
+    </span>
 <% end %>
