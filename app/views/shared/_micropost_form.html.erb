@@ -10,6 +10,7 @@
     </div>
     <%= form.submit "Post", class: "btn btn-primary" %>
     <span class="image">
-        <%= form.file_field :image_file %>
+        <%# This has CSS id #micropost_image_file %>
+        <%= form.file_field :image_file, accept: "image/jpeg, image/gif, image/png" %>
     </span>
 <% end %>
