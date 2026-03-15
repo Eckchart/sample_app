@@ -1,7 +1,7 @@
 <%= form_with(model: @micropost) do |form| %>
     <%# Make it so that if we make an invalid form submission,
     <%# and we are e.g. on page 2, we don't get shown page 1 of
-    <%# the microposts, but rather still page 2. %>
+    <%# the microposts, but rather still page 2.
     <%# <%= hidden_field_tag :page, params[:page] %>
 
     <%= render 'shared/error_messages', object: form.object %>

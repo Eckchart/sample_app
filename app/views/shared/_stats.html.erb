@@ -1,0 +1,23 @@
+<%# We'll use this partial in the home and profile (user show) pages;
+<%# if we are on a profile page, `@user` won't be nil, because we already
+<%# assigned a value to it in the `users#show` action, but, if we are in the
+<%# home page, `@user` should just be the currently logged-in user, since 
+<%# we don't assign a value to `@user` in the `static_pages#home` action. %>
+<% @user ||= current_user %>
+<div class="stats">
+    <%# URL will be like `/users/:id/following` %>
+    <a href="<%= following_user_path(@user) %>">
+        <strong id="following" class="stat">
+            <%= @user.following.count %>
+        </strong>
+        following
+    </a>
+
+    <%# URL will be like `/users/:id/followers` %>
+    <a href="<%= followers_user_path(@user) %>">
+        <strong id="followers" class="stat">
+            <%= @user.followers.count %>
+        </strong>
+        followers
+    </a>
+</div>
