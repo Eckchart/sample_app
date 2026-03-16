@@ -27,15 +27,27 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
-  # Defines a proto-feed.
+  # Returns a user's status feed.
   def feed
-    Micropost.where("user_id = ?", self.id)
+    following_ids_subselect = "SELECT followed_id FROM relationships
+                               WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids_subselect}) OR user_id = :user_id",
+                     user_id: self.id)
+             .includes(:user, { image_file_attachment: :blob })  # EAGER LOADING
+
+    # IDK this query seems way worse (consumes wayyyyy too much memory, does
+    # unnecessary joins, for no reason) than the one above, and very redundant
+    # and complicated, so I'm going to just use the other query.
+    # part_of_feed_sql = "relationships.follower_id = :user_id OR microposts.user_id = :user_id"
+    # Micropost.left_joins(user: :followers)
+    #          .where(part_of_feed_sql, { user_id: self.id }).distinct
+    #          .includes(:user, { image_file_attachment: :blob })  # EAGER LOADING
   end
 
   # Follows a user.
   def follow(other_user)
     # `<<` appends `other_user` to the end of the `following` ""array""
-    # (TECHNICALLY NOT AN ARRAY BUT IT ACTS LIKE AN ARRAY).
+    # (TECHNICALLY NOT AN ARRAY BUT IT ACTS LIKE AN ARRAY (DUCK TYPING)).
     self.following << other_user unless self == other_user
   end
 
