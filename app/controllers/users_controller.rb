@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.paginate(page: params[:page])
   end
 
+  # display the following page for the given user
   def following
     @title = "Following"
     @user = User.find(params[:id])
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
     render 'show_follow', status: :ok#, status: :unprocessable_entity
   end
 
+  # display the followers page for the given user
   def followers
     @title = "Followers"
     @user = User.find(params[:id])

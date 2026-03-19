@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:session][:password])
       forwarding_url = session[:forwarding_url]
       reset_session
+      remember user
       log_in user
 
       # `user` is equivalent to the url `user_url(@user)`
@@ -23,7 +24,7 @@ class SessionsController < ApplicationController
 
   # log out (delete request)
   def destroy
-    log_out
+    log_out if logged_in?
 
     # http status code 303
     redirect_to root_url, status: :see_other

@@ -84,4 +84,9 @@ class LogoutTest < Logout
     assert_select "a[href=?][data-turbo-method=?]", logout_path, "delete", count: 0
     assert_select "a[href=?]", user_path(@user), count: 0  # "Profile" link
   end
+
+  test "should still work, after logout from first window, in second window" do
+    delete logout_path
+    assert_redirected_to root_url
+  end
 end
