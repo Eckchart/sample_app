@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:session][:password])
       forwarding_url = session[:forwarding_url]
       reset_session
-      remember user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       log_in user
 
       # `user` is equivalent to the url `user_url(@user)`

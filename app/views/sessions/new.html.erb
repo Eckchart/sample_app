@@ -5,10 +5,18 @@
     <div class="col-md-6 col-md-offset-3">
         <%= form_with(url: login_path, scope: :session) do |form| %>
             <%= form.label :email %>
-            <%= form.email_field :email, class: 'form-control' %>
+
+            <%# Save email in case we submit an invalid form. %>
+            <%= form.email_field :email, value: params.dig(:session, :email),
+                class: 'form-control' %>
 
             <%= form.label :password %>
             <%= form.password_field :password, class: 'form-control' %>
+
+            <%= form.label :remember_me, class: "checkbox inline" do %>
+                <%= form.check_box :remember_me %>
+                <span>Remember me on this computer</span>
+            <% end %>
 
             <%= form.submit "Log in", class: "btn btn-primary" %>
         <% end %>

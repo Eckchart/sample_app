@@ -225,6 +225,20 @@ input {
     }
 }
 
+.checkbox {
+    margin-top: -5px;
+    margin-bottom: 10px;
+    span {
+        margin-left: 20px;
+        font-weight: normal;
+    }
+}
+
+#session_remember_me {
+    width: auto;
+    margin-left: 0;
+}
+
 // dropdown menu
 
 // this selects elements with both the class
