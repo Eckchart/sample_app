@@ -5,15 +5,15 @@ class SessionsController < ApplicationController
 
   # log in (post request)
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user&.authenticate(params[:session][:password])
+    @user = User.find_by(email: params[:session][:email].downcase)
+    if @user&.authenticate(params[:session][:password])
       forwarding_url = session[:forwarding_url]
       reset_session
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      log_in user
+      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+      log_in @user
 
-      # `user` is equivalent to the url `user_url(@user)`
-      redirect_to forwarding_url || user
+      # `@user` is equivalent to the url `user_url(@user)`
+      redirect_to forwarding_url || @user
     else
       flash.now[:danger] = 'Invalid email/password combination'
 

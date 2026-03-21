@@ -39,6 +39,13 @@ class User < ApplicationRecord
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(self.remember_token))
+    return self.remember_digest
+  end
+
+  # Returns a session token to prevent session hijacking.
+  # We reuse the remember digest as a session token, for convenience.
+  def session_token
+    return self.remember_digest || self.remember
   end
 
   # Returns true if the given token matches the digest.
@@ -49,7 +56,7 @@ class User < ApplicationRecord
 
   # Forgets a user.
   def forget
-    update_attribute(:remember_digest, nil)
+    self.update_attribute(:remember_digest, nil)
   end
 
   # Returns a user's status feed.
