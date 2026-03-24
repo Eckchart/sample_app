@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  # todo: replace with actual email address when sending
+  # emails in production
+  default from: "user@realdomain.com"
   layout "mailer"
 end
