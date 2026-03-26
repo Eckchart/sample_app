@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
   attr_accessor :remember_token, :activation_token
 
   before_create :create_activation_digest
@@ -59,6 +60,17 @@ class User < ApplicationRecord
   # Forgets a user.
   def forget
     self.update_attribute(:remember_digest, nil)
+  end
+
+  # Activates account.
+  def activate
+    self.update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  # Sends an activation email.
+  # A better name for this would be `get_activation_email` imo.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
   end
 
   # Returns a user's status feed.
