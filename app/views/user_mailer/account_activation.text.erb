@@ -2,5 +2,6 @@ Hi <%= @user.name %>,
 
 Welcome to the Sample App! Click on the link below to activate your account:
 
-<%# second argument is a query parameter %>
+<%# URL will be like /account_activations/:id/edit?email=`userEmail`;
+<%# in this case, `:id` will take the value of `@user.activation_token` %>
 <%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

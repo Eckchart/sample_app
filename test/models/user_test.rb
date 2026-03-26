@@ -73,7 +73,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "`authenticated?` should return false for a user with nil remember_digest" do
     # `@user` should have its `remember_digest` = nil for this test.
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 
   test "associated microposts should be destroyed" do
