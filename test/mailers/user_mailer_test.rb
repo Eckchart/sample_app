@@ -7,9 +7,7 @@ class UserMailerTest < ActionMailer::TestCase
     mail = UserMailer.account_activation(user)
     assert_equal "Account activation", mail.subject
     assert_equal [user.email], mail.to
-    # todo replace with actual email address when sending emails
-    # in production
-    assert_equal ["user@realdomain.com"], mail.from
+    assert_equal ["noreply@accounts.sample-app.me"], mail.from
     assert_match user.name, mail.body.encoded
     assert_match user.activation_token, mail.body.encoded
     assert_match CGI.escape(user.email), mail.body.encoded

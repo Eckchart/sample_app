@@ -1,6 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  # todo: replace with actual email address when sending
-  # emails in production
-  default from: "user@realdomain.com"
+  default from: "noreply@accounts.sample-app.me"
   layout "mailer"
 end

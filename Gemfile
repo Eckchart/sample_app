@@ -5,6 +5,7 @@ ruby "3.1.2"
 
 # Added by me
 gem "concurrent-ruby", "1.3.4"
+gem "resend"  # USE RESEND INSTEAD OF SENDGRID
 
 gem "rails",                      "7.0.4"
 gem "bcrypt",                     "3.1.18"
@@ -32,6 +33,8 @@ end
 
 group :development do
   gem "web-console", "4.2.0"
+  gem "ruby-lsp",    "0.26.9"
+  gem "standard",    ">= 1.35.1"
 end
 
 group :test do
